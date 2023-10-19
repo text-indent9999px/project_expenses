@@ -9,6 +9,9 @@ const ExpenseFilter = (props) => {
 			const lastInputYear = new Date(data[data.length-1]['date']).getFullYear();
 			setInputYear(lastInputYear);
 			props.onFilterChange(String(lastInputYear)); // 선택된 값을 상위 컴포넌트로 전달
+		}else{
+			setInputYear('9999');
+			props.onFilterChange(String('9999')); // 선택된 값을 상위 컴포넌트로 전달
 		}
 	}, [props.items]);
 
@@ -27,9 +30,9 @@ const ExpenseFilter = (props) => {
 	return (
 		<div className="expenses-filter">
 			<div className="expenses-filter__control">
-				<label>Filter by year</label>
+				<label>연도별 보기</label>
 				<select name="" id="" value={inputYear} onChange={handleFilterChange}>
-					{props.items.length === 0 && <option>-</option>}
+					{props.items.length === 0 && <option key={'9999'} value={'9999'}>-</option>}
 					{props.items.length > 0 && uniqueYears.map((year) => (
 						<option key={year} value={year}>
 							{year}

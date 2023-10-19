@@ -1,15 +1,18 @@
 @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;700&display=swap');
+@font-face {
+  font-family: 'SUITE-Regular';
+  src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2304-2@1.0/SUITE-Regular.woff2') format('woff2');
+  font-weight: 400;
+  font-style: normal;
+}
 
 * {
   box-sizing: border-box;
-}
-
-html {
-  font-family: 'Noto Sans JP', sans-serif;
+  font-family: 'SUITE-Regular';
 }
 
 body {
   margin: 0;
-  background-color: #3f3f3f;
-}
+  background: ivory;
 
+}

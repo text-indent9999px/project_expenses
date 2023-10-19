@@ -21,7 +21,9 @@ const ExpenseChart = (props) => {
 		props.items.forEach(function(e){
 			let month = new Date(e.date).getMonth();
 			let amount = Number(e.amount);
-			chartDataPoints[month]['value'] = chartDataPoints[month]['value'] + amount;
+			if(e.amountType == 'minus'){
+				chartDataPoints[month]['value'] = chartDataPoints[month]['value'] + amount;
+			}
 		});
 
 		let year = new Date(props.items[0]['date']).getFullYear();

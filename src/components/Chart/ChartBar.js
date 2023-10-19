@@ -1,16 +1,17 @@
 import React from "react";
 import './ChartBar.css'
+import CurrencyDisplay from "../Common/CurrencyDisplay";
 const ChartBar = (props) => {
 
 	let maxValue = 0;
-	let maxValueStep1 = 113;
+	let maxValueStep1 = 200000;
 	let inValueMaxValue = Math.round(props.maxValue);
-	let maxValueStep2 = 300;
+	let maxValueStep2 = 500000;
 
 	maxValue = maxValueStep1;
 
 	if(inValueMaxValue > maxValueStep1){
-		maxValue = inValueMaxValue + 50;
+		maxValue = inValueMaxValue;
 	}
 	if(maxValue > maxValueStep2){
 		maxValue = maxValueStep2;
@@ -31,6 +32,7 @@ const ChartBar = (props) => {
 				<div className="chart-bar__fill" style={fillStyles}></div>
 			</div>
 			<div className="chart-bar__label">{props.label}</div>
+			<div className="chart-bar__total"><CurrencyDisplay amount={`${props.value}`}/></div>
 		</div>
 	)
 }
