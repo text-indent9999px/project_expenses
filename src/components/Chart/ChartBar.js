@@ -4,24 +4,14 @@ import CurrencyDisplay from "../Common/CurrencyDisplay";
 const ChartBar = (props) => {
 
 	let maxValue = 0;
-	let maxValueStep1 = 200000;
 	let inValueMaxValue = Math.round(props.maxValue);
-	let maxValueStep2 = 500000;
 
-	maxValue = maxValueStep1;
-
-	if(inValueMaxValue > maxValueStep1){
-		maxValue = inValueMaxValue;
-	}
-	if(maxValue > maxValueStep2){
-		maxValue = maxValueStep2;
-	}
+	maxValue = inValueMaxValue + inValueMaxValue/3;
 
 	let percent = Math.round((props.value)/maxValue * 100);
 	if(percent > 100){
 		percent = 100;
 	}
-
 	const fillStyles = {
 		height: `${percent}%`,
 	};

@@ -11,39 +11,79 @@
 .chart-bar__inner {
     height: 100%;
     width: 100%;
+
+    /*
     border: 1px solid rgb(33,28,53);
     border-radius: 12px;
-    background-color: ivory;
+    background-color: ivory;*/
     overflow: hidden;
     display: flex;
     flex-direction: column;
     justify-content: flex-end;
+
+
+    border: 0;
+    outline: 0;
+    font-size: 16px;
+    border-radius: 320px;
+    background-color: #EBECF0;
+    box-shadow: inset 2px 2px 5px #BABECC, inset -5px -5px 10px #FFF;
+    box-sizing: border-box;
+    transition: all 0.2s ease-in-out;
+    appearance: none;
+    -webkit-appearance: none;
+    color: #ccc;
+    text-shadow: 1px 1px 0 #FFF;
+    font-weight: bold;
 }
 
 .chart-bar__fill {
-    background-color: rgb(86,78,126);
+    /*
+    background-color: #EBECF0;
+    box-shadow: inset 2px 2px 5px #BABECC, inset -5px -5px 10px #FFF;*/
+
+    background-color: #ffc0c0;
+    box-shadow: inset 2px 2px 5px #ff8d8d, inset -5px -5px 10px #ffe6e6;
+
+    box-shadow: inset 2px 2px 5px #ffe6e6, inset -5px -5px 10px #ff8d8d;
+
     width: 100%;
     transition: all 0.3s ease-out;
 }
+
+.expense_chart__plus .chart-bar__fill{
+    background-color: #78c1f3;
+    box-shadow: inset 2px 2px 5px #609ac2, inset -5px -5px 10px #bce0f9;
+
+    box-shadow: inset 2px 2px 5px #bce0f9, inset -5px -5px 10px #609ac2;
+}
+
 
 .chart-bar__label {
     font-weight: bold;
     font-size: 13px;
     text-align: center;
     margin-top: 5px;
+
+    color: #333;
+    text-shadow: 1px 1px 0 #999;
 }
 
 .chart-bar__total{
     position: absolute;
     top: 100%;
-    background: #fff;
-    box-shadow: 0 1px 8px rgba(0, 0, 0, 0.25);
-    border-radius: 4px;
+    border-radius: 10px;
     opacity: 0;
     transition: .3s ease-in-out;
     padding: 0.5rem;
     left: 50%;
     transform: translateX(-50%);
+
+    background-color: #EBECF0;
+    box-shadow: -2px -2px 5px #FFF, 5px 5px 20px #BABECC;
+
+    color: #333;
+    text-shadow: 1px 1px 0 #999;
 }
 
 .chart-bar:hover .chart-bar__total{

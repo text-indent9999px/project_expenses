@@ -24,7 +24,7 @@ const NewExpense = (props) => {
 
 	return (
 		<div className="new-expense">
-			<button className={`new-expense__button ${isClicked ? 'new-expense__button--clicked' : ''}`}
+			<button className={`new-expense__button ${isClicked ? 'new-expense__button--clicked' : ''} controls__button`}
 					onClick={handleClick}>
 				작성하기
 			</button>

@@ -43,8 +43,8 @@ const ExpenseItem = (props) => {
 						<div className="expense-item__price">{`${props.amountType == 'plus' ? '+' : '-'}`} <CurrencyDisplay amount={`${props.amount}`}/></div>
 					</div>
 					<div className="expense-item__buttons">
-						<div className="expense-item__modify" onClick={modifyClick}>수정</div>
-						<div className="expense-item__delete" onClick={deleteClick}>삭제</div>
+						<div className="expense-item__modify controls__button" onClick={modifyClick}>수정</div>
+						<div className="expense-item__delete controls__button" onClick={deleteClick}>삭제</div>
 					</div>
 				</Card>
 			</li>

@@ -2,9 +2,12 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 0.5rem;
+    padding: 1.5rem;
     margin: 1rem 0;
-    background: #fff;
+
+    background-color: #EBECF0;
+    overflow: hidden;
+    box-shadow: -5px -5px 20px #FFF, 5px 5px 20px #BABECC;
 }
 
 .expense-item__description {
@@ -18,32 +21,61 @@
 }
 
 .expense-item h2 {
-    color: #3a3a3a;
     font-size: 1rem;
     flex: 1;
     margin: 0 1rem;
+
+    color: #333;
+    text-shadow: 1px 1px 0 #999;
 }
 
 .expense-item__description span{
     font-size: 14px;
     margin-left: 15px;
+    width: 80px;
+    color: #333;
+    text-shadow: 1px 1px 0 #999;
+
+    background-color: #EBECF0;
+    box-shadow: -5px -5px 20px #FFF, 5px 5px 20px #BABECC;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 10px;
+    border-radius: 5px;
 }
 
 .expense-item__price {
-    font-size: 1rem;
+
+    border: 0;
+    outline: 0;
+    font-size: 16px;
+    padding: 16px;
+    background-color: #EBECF0;
+    box-shadow: -5px -5px 20px #FFF, 5px 5px 20px #BABECC;
+    cursor: pointer;
+    border-radius: 10px;
+    line-height: 0;
+    width: auto;
+    height: 48px;
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    transition: .3s ease-in-out;
+    color: #333;
+    text-shadow: 1px 1px 0 #999;
     font-weight: bold;
-    color: white;
-    border: 1px solid white;
-    padding: 0.5rem;
-    border-radius: 12px;
 }
 
 .expense-item__minus .expense-item__price{
-    background: rosybrown;
+    color: #ff8080;
+    text-shadow: 1px 1px 0 #ffb3b3;
 }
 
 .expense-item__plus .expense-item__price{
-    background: darkolivegreen;
+    color: #6caedb;
+    text-shadow: 1px 1px 0 #93cdf5;
 }
 
 .expense-item__buttons{
@@ -74,24 +106,12 @@
     color: white;
     border-radius: 5px;
     font-size: 14px;
+
 }
 
-.expense-item__buttons > div:hover,
-.expense-item__buttons > div:active {
-    background-color: rgb(33,28,53);
-    border-color: rgb(33,28,53);
-}
 
-.expense-item__buttons > div.alternative {
-    color: #220131;
-    border-color: transparent;
-    background-color: transparent;
-}
 
-.expense-item__buttons > div.alternative:hover,
-.expense-item__buttons > div.alternative:active {
-    background-color: #ddb3f8;
-}
+
 
 
 

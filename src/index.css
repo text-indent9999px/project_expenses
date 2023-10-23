@@ -13,6 +13,129 @@
 
 body {
   margin: 0;
-  background: ivory;
+  background-color: #EBECF0;
 
+}
+
+html body .controls__button{
+
+  border: 0;
+  outline: 0;
+  font-size: 16px;
+  padding: 16px;
+  background-color: #EBECF0;
+
+  box-shadow: -5px -5px 20px #FFF, 5px 5px 20px #BABECC;
+  cursor: pointer;
+
+  border-radius: 8px;
+  line-height: 0;
+  width: auto;
+  height: 48px;
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  transition: .3s ease-in-out;
+
+  color: #333;
+  text-shadow: 1px 1px 0 #999;
+  font-weight: bold;
+}
+
+html body .controls__button[class*="--clicked"],
+html body input:checked + .controls__button{
+  box-shadow: inset 1px 1px 2px #BABECC, inset -1px -1px 2px #FFF;
+}
+
+html body input:not(:checked) + .controls__button:not([class*="--clicked"]):hover,
+.controls__button:not([class*="--clicked"]):hover:first-child,
+.controls__button:not([class*="--clicked"]):first-child + .controls__button:hover{
+  box-shadow: -2px -2px 5px #FFF, 2px 2px 5px #BABECC;
+}
+
+
+
+html .react-select__control,
+html .react-select__control--is--focused{
+  border: 0;
+  outline: 0;
+  font-size: 16px;
+  border-radius: 320px;
+  padding: 0 16px;
+  background-color: #EBECF0;
+  height: 48px;
+  box-shadow: inset 2px 2px 5px #BABECC, inset -5px -5px 10px #FFF;
+  width: 100%;
+  box-sizing: border-box;
+  transition: all 0.2s ease-in-out;
+  appearance: none;
+  -webkit-appearance: none;
+  color: #333;
+  text-shadow: 1px 1px 0 #999;
+  font-weight: bold;
+}
+html .react-select__input-container{
+  padding: 0;
+  margin: 0;
+}
+html .react-select__input-container input{
+  opacity: 0 !important;
+}
+html .react-select__value-container {
+  padding: 0;
+  margin: 0;
+}
+
+html .react-select__indicator-separator{
+  display: none;
+}
+
+html .react-select__indicators div{
+  color: hsl(0, 0%, 40%) !important;
+}
+
+
+html .react-select__indicator svg{
+  filter: drop-shadow(1px 2px 2px #555);
+}
+
+html .react-select__menu{
+  border: 0;
+  outline: 0;
+  font-size: 16px;
+  background-color: #EBECF0;
+  box-shadow: inset 2px 2px 5px #BABECC, inset -5px -5px 10px #FFF;
+  width: 100%;
+  box-sizing: border-box;
+  transition: all 0.2s ease-in-out;
+  appearance: none;
+  -webkit-appearance: none;
+  color: #333;
+  text-shadow: 1px 1px 0 #999;
+  font-weight: bold;
+  border-radius: 10px;
+}
+
+html .react-select__menu > *{
+  margin: 0;
+  padding: 5px 8px;
+}
+
+html .react-select__menu-list{
+
+}
+
+html .react-select__menu-list *{
+  cursor: pointer;
+}
+html .react-select__menu-list *[class*="selected"]{
+  background: transparent;
+  color: yellowgreen;
+  text-shadow: 1px 1px 0 olivedrab;
+}
+
+html .react-select__menu-list *[class*="focus"]{
+  background: transparent;
+  color: #FFF;
+  text-shadow: 1px 1px 0 #AAA;
 }
