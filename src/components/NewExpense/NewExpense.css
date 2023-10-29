@@ -1,18 +1,13 @@
 .new-expense {
-    padding: 2rem;
-    margin: 2rem auto;
-    width: 50rem;
-    max-width: 95%;
-    border-radius: 12px;
-    text-align: center;
-
-    background-color: #EBECF0;
-    overflow: hidden;
-    box-shadow: -5px -5px 20px #FFF, 5px 5px 20px #BABECC;
+    padding: 0;
+    margin: 0;
+    width: 100%;
+    max-width: 100%;
+    height: 100%;
 }
 
-.new-expense button {
-
+html body .new-expense > .controls__button{
+    width: 100%;
 }
 .new-expense button:hover,
 .new-expense button:active {
@@ -23,4 +18,8 @@
 
 .new-expense button.alternative:hover,
 .new-expense button.alternative:active {
+}
+
+.tempClick{
+    padding: 2rem;
 }

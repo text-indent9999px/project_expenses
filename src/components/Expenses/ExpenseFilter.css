@@ -1,5 +1,7 @@
 .expenses-filter {
     font-size: 20px;
+    position: relative;
+    z-index: 11;
 }
 
 

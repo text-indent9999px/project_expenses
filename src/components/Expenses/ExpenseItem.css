@@ -8,6 +8,7 @@
     background-color: #EBECF0;
     overflow: hidden;
     box-shadow: -5px -5px 20px #FFF, 5px 5px 20px #BABECC;
+    position: relative;
 }
 
 .expense-item__description {
@@ -21,7 +22,7 @@
 }
 
 .expense-item h2 {
-    font-size: 1rem;
+    font-size: 20px;
     flex: 1;
     margin: 0 1rem;
 
@@ -31,7 +32,7 @@
 
 .expense-item__description span{
     font-size: 14px;
-    margin-left: 15px;
+    font-weight: bold;
     width: 80px;
     color: #333;
     text-shadow: 1px 1px 0 #999;
@@ -47,21 +48,18 @@
 }
 
 .expense-item__price {
-
     border: 0;
     outline: 0;
-    font-size: 16px;
+    font-size: 18px;
     padding: 16px;
     background-color: #EBECF0;
     box-shadow: -5px -5px 20px #FFF, 5px 5px 20px #BABECC;
     cursor: pointer;
     border-radius: 10px;
-    line-height: 0;
+    height: auto;
     width: auto;
-    height: 48px;
     display: inline-flex;
     justify-content: center;
-    align-items: center;
     transition: .3s ease-in-out;
     color: #333;
     text-shadow: 1px 1px 0 #999;
@@ -82,11 +80,28 @@
     display: flex;
     align-items: center;
     column-gap: 10px;
-    margin-left: 10px;
+    margin-left: 20px;
+    flex-direction: column;
+    row-gap: 15px;
 }
 
+html body .expense-item__buttons .controls__button{
+    width: 40px;
+    height: 40px;
+    font-size: 13px;
+    color: darkseagreen;
+    color: #333;
+}
 
-.expense-item__delete{
+html body .expense-item__buttons .controls__button > svg{
+    filter: drop-shadow(1px 1px 1px #555);
+}
+
+html body .expense-item-li.selected .expense-item__buttons .controls__button.expense-item__modify{
+    box-shadow: inset 1px 1px 2px #BABECC, inset -1px -1px 2px #FFF;
+}
+
+html body .expense-item__buttons .controls__button.expense-item__delete{
 
 }
 
@@ -94,41 +109,55 @@
 
 }
 
-.expense-item__buttons{
-    margin-right: 15px;
-}
-.expense-item__buttons > div {
-    font: inherit;
-    cursor: pointer;
-    padding: 0.5rem 1rem;
-    border: 1px solid rgb(86,78,126);
-    background-color: rgb(86,78,126);
-    color: white;
-    border-radius: 5px;
-    font-size: 14px;
-
-}
 
 
 
 
-
-
-
-@media (min-width: 580px) {
+@media (min-width: 601px) {
     .expense-item__description {
         flex-direction: row;
         align-items: center;
         justify-content: flex-start;
         flex: 1;
     }
-
-    .expense-item__description h2 {
-        font-size: 1.25rem;
+}
+@media screen and (max-width: 600px) {
+    .expense-item{
+        flex-wrap: wrap;
+    }
+    .expense-item__description {
+        width: 100%;
+        min-width: 100%;
+        position: relative;
+        padding-top: 50px;
+        flex-flow: row;
+        align-items: center;
+        margin-bottom: 20px;
+    }
+    .expense-item__description span{
+        position: absolute;
+        top: 0;
+        left: 0;
+        font-size: 12px;
+    }
+    .expense-item h2{
+        margin: 0 0 0 20px;
+        padding: 0;
+        width: 100%;
+        font-size: 16px;
+    }
+    .expense-item__price{
+        font-size: 16px;
+    }
+    .expense-item__buttons{
+        width: 100%;
+        flex-direction: row;
+        margin: 0;
+        justify-content: flex-end;
+        column-gap: 15px;
     }
 
-    .expense-item__price {
-        font-size: 1.25rem;
-        padding: 0.5rem 1.5rem;
+    html body .expense-item__buttons .controls__button{
+        width: 100%;
     }
 }

@@ -1,66 +1,59 @@
-import React from "react";
+import React, {useEffect, useState} from "react";
 import Chart from "../Chart/Chart";
+import {connect} from "react-redux";
+import {expensesSet, yearSelect} from "../../actions/actions";
+
 const ExpenseChart = (props) => {
 
-	const chartDataPoints = [
-		{ label: 'Jan', value: 0 },
-		{ label: 'Feb', value: 0 },
-		{ label: 'Mar', value: 0 },
-		{ label: 'Apr', value: 0 },
-		{ label: 'May', value: 0 },
-		{ label: 'Jun', value: 0 },
-		{ label: 'Jul', value: 0 },
-		{ label: 'Aug', value: 0 },
-		{ label: 'Sep', value: 0 },
-		{ label: 'Oct', value: 0 },
-		{ label: 'Nov', value: 0 },
-		{ label: 'Dec', value: 0 }
-	];
+	const [dataCheck, setDataCheck] = useState(false);
+	const [chartDataPoints, setDataChartDataPoints] = useState([]);
 
-	const chartDataPoints2 = [
-		{ label: 'Jan', value: 0 },
-		{ label: 'Feb', value: 0 },
-		{ label: 'Mar', value: 0 },
-		{ label: 'Apr', value: 0 },
-		{ label: 'May', value: 0 },
-		{ label: 'Jun', value: 0 },
-		{ label: 'Jul', value: 0 },
-		{ label: 'Aug', value: 0 },
-		{ label: 'Sep', value: 0 },
-		{ label: 'Oct', value: 0 },
-		{ label: 'Nov', value: 0 },
-		{ label: 'Dec', value: 0 }
-	];
+	useEffect(() => {
+		if (props.expensesSetArr.length > 0) {
+			const newArr = Array.from({ length: 12 }, (_, i) => ({
+				label: `${i + 1}월`,
+				plus: 0,
+				minus: 0,
+				key: `${props.yearSelected}${i}`,
+			}));
+			props.expensesSetArr.forEach((e) => {
+				const month = new Date(e.date).getMonth();
+				const amount = Number(e.amount);
+				newArr[month][e.amountType] += amount;
+			});
+			setDataCheck(true);
+			setDataChartDataPoints(newArr);
+		} else {
+			const newArr = Array.from({ length: 12 }, (_, i) => ({
+				label: `${i + 1}월`,
+				plus: 0,
+				minus: 0,
+				key: `9999${i}`,
+			}));
+			setDataChartDataPoints(newArr);
+			setDataCheck(false);
+		}
+	}, [props.expensesSetArr]);
 
-
-	if(props.items.length > 0){
-		props.items.forEach(function(e){
-			let month = new Date(e.date).getMonth();
-			let amount = Number(e.amount);
-			if(e.amountType == 'minus'){
-				chartDataPoints[month]['value'] = chartDataPoints[month]['value'] + amount;
-			}else{
-				chartDataPoints2[month]['value'] = chartDataPoints2[month]['value'] + amount;
-			}
-		});
-
-		let year = new Date(props.items[0]['date']).getFullYear();
-		chartDataPoints.forEach(function(e, i){
-			e['key'] = String(year) + i;
-		})
-		chartDataPoints2.forEach(function(e, i){
-			e['key'] = String(year) + i;
-		})
-	}else{
-		let year = '9999';
-		chartDataPoints.forEach(function(e, i){
-			e['key'] = String(year) + i;
-		});
-		chartDataPoints2.forEach(function(e, i){
-			e['key'] = String(year) + i;
-		});
-	}
-
-	return <Chart className={props.className} items={chartDataPoints} items2={chartDataPoints2}/>
+	return <Chart className={`${props.className} ${dataCheck ? '' : 'chart_nodata'}`}
+				  chartData={chartDataPoints} />
 }
-export default ExpenseChart;
+
+const mapStateToProps = (state) => {
+	return {
+		expenses: state.expenses,
+		expensesSetArr: state.expensesSetArr,
+		yearSelected: state.yearSelected,
+	};
+};
+
+const mapDispatchToProps = (dispatch) => {
+	return {
+		expensesSet: (expenseData) => dispatch(expensesSet(expenseData)),
+		yearSelect: (str) => dispatch(yearSelect(str)),
+	};
+};
+
+
+//export default App;
+export default connect(mapStateToProps, mapDispatchToProps)(ExpenseChart);

@@ -1,6 +1,18 @@
+.expenses-list-container{
+    margin-top: 30px;
+}
+
+.expenses-list-container > strong{
+    font-weight: bold;
+    font-size: 18px;
+    color: #333;
+    text-shadow: 1px 1px 0 #999;
+}
+
 .expenses-list {
     list-style: none;
     padding: 0;
+    margin: 0;
 }
 
 .expenses-list__fallback {
@@ -8,3 +20,29 @@
     text-align: center;
 }
 
+.expense-list-dummy{
+    color: #333;
+    text-shadow: 1px 1px 0 #999;
+    font-weight: bold;
+}
+
+.expense-list-dummy .expense-item-li-dummy{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 50vh;
+}
+
+.expense-list-dummy .expense-item-li-dummy .card{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    row-gap: 20px;
+    width: 100%;
+}
+
+.expense-list-dummy .expense-item-li-dummy .card p{
+    margin: 0;
+    padding-top: 10px;
+}

@@ -1,29 +1,39 @@
-import React, {useState} from "react";
+import React, {useEffect, useState} from "react";
 import './Expenses.css';
 import ExpenseFilter from "./ExpenseFilter";
 import ExpensesList from "./ExpensesList";
 import Card from "../UI/Card";
 import ExpenseChart from "./ExpenseChart";
-
+import ExpensesSummary from "./ExpensesSummary";
+import {connect} from "react-redux";
+import {expensesSet, yearSelect} from "../../actions/actions";
 const Expenses = (props) => {
 
-	const [selectedData, setSelectedData] = useState([]);
-
-	const filterChangeHandler = (selectedYear) => {
-		const filteredExpenses = props.items.filter((expense) => {
-			const expenseYear = String(new Date(expense.date).getFullYear());
-			return expenseYear === selectedYear;
-		});
-		setSelectedData(filteredExpenses);
-	};
-
 	return (
-		<Card className="expenses">
-			<ExpenseFilter items={props.items} onFilterChange={filterChangeHandler} />
-			<ExpenseChart items={selectedData} className={"expense_chart__plus"} />
-			<ExpenseChart items={selectedData} className={"expense_chart__minus"} />
-			<ExpensesList items={selectedData} onDeleteExpense={props.onDeleteExpense} onModifyExpense={props.onModifyExpense}/>
-		</Card>
+		<div className="expenses-container">
+			<Card className="expenses">
+				<ExpenseFilter />
+				<ExpensesSummary />
+				<ExpenseChart className={"expense_chart__plus"} />
+				<ExpenseChart className={"expense_chart__minus"} />
+				<ExpensesList />
+			</Card>
+		</div>
 	)
 }
-export default Expenses;
+const mapStateToProps = (state) => {
+	return {
+		expenses: state.expenses,
+		expensesSetArr: state.expensesSetArr,
+		yearSelected: state.yearSelected,
+	};
+};
+
+const mapDispatchToProps = (dispatch) => {
+	return {
+		expensesSet: (expenseData) => dispatch(expensesSet(expenseData)),
+		yearSelect: (str) => dispatch(yearSelect(str)),
+	};
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(Expenses);

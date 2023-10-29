@@ -1,3 +1,14 @@
+.chart-item{
+
+}
+
+.chart-title{
+    display: block;
+    margin: 20px 0;
+    color: #333;
+    text-shadow: 1px 1px 0 #999;
+}
+
 .chart {
     padding: 1rem;
     text-align: center;
@@ -8,8 +19,24 @@
 
     background-color: #EBECF0;
     box-shadow: -5px -5px 20px #FFF, 5px 5px 20px #BABECC;
+    position: relative;
+    z-index: 10;
 }
 
-.chart:not(:first-child){
-    margin-top: 15px;
+.chart-item:not(:first-child){
+    margin-top: 30px;
+}
+
+.chart_nodata{
+    display: none;
+}
+
+@media screen and (max-width: 1000px) {
+    .chart{
+        height: auto;
+        flex-direction: column;
+        row-gap: 15px;
+        padding: 2rem 1rem;
+    }
+
 }

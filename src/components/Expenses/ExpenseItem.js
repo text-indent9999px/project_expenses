@@ -1,54 +1,113 @@
-import React from "react";
+import React, {useEffect, useState} from "react";
 import './ExpenseItem.css'
 import Card from "../UI/Card";
-import ExpenseDate from "./ExpenseDate";
 import CurrencyDisplay from "../Common/CurrencyDisplay";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faPen, faX } from "@fortawesome/free-solid-svg-icons";
+
+import { connect } from 'react-redux';
+import {
+	expensesAdd,
+	expensesModify,
+	expensesDelete,
+	expensesSelect,
+	expensesClick,
+	alertPopupState, alertPopupMessage, expenseUpdateFlag, yearSelect, expensesSet, yearSelectBefore
+} from "../../actions/actions";
 
 const ExpenseItem = (props) => {
 
-	const deleteClick = () => {
-		const userConfirmed = window.confirm("정말 삭제하시겠습니까?");
-		if(userConfirmed){
-			props.onDeleteExpense(props.data);
-		}
+	let data = props.data;
+	const [deleteChkData, setDeleteChkData] = useState({});
+
+	const deleteClick = (event) => {
+		props.alertPopupState(true);
+		props.alertPopupMessage('정말 삭제하시겠습니까?');
+		setDeleteChkData(Object.assign({}, data));
 	};
 
-	const modifyClick = () => {
-		props.onModifyExpense(props.data);
-		window.scrollTo({
-			top: 0,
-			behavior: 'smooth', // You can use 'auto' or 'smooth' for scrolling behavior
-		});
+	useEffect(() => {
+		if(props.isAlertPopupOk){
+			if(typeof deleteChkData.date !== "undefined"){
+				props.yearSelectBefore(props.yearSelected);
+				props.expensesDelete(deleteChkData);
+				props.expensesSelect([]);
+				props.expenseUpdateFlag(true);
+			}
+		}
+	}, [props.isAlertPopupOk]);
+
+	const modifyClick = (event) => {
+		props.expensesSelect([props.data]);
+		props.expensesClick(true);
 	};
 
 
 	if(props.id == 'dummy'){
 		return (
-			<li>
+			<li className="expense-item-li expense-item-li-dummy">
 				<Card className="expense-item">
-					<div>
-						가계부 항목을 추가해주세요.
+					<p>가계부 항목을 추가해주세요.</p>
+					<div className="controls__actions">
+						<div className="controls__button"
+							 onClick={(e) => props.expensesClick(true)}>
+							추가하기
+						</div>
 					</div>
 				</Card>
 			</li>
 		)
 	}else{
 		return (
-			<li>
+			<li className="expense-item-li">
 				<Card className={`expense-item ${props.amountType == 'plus' ? 'expense-item__plus' : 'expense-item__minus'}`}>
-					<ExpenseDate date={props.date}/>
 					<div className="expense-item__description">
 						<span>{props.category}</span>
 						<h2>{props.title}</h2>
 						<div className="expense-item__price">{`${props.amountType == 'plus' ? '+' : '-'}`} <CurrencyDisplay amount={`${props.amount}`}/></div>
 					</div>
 					<div className="expense-item__buttons">
-						<div className="expense-item__modify controls__button" onClick={modifyClick}>수정</div>
-						<div className="expense-item__delete controls__button" onClick={deleteClick}>삭제</div>
+						<div className="expense-item__modify controls__button" onClick={modifyClick}><FontAwesomeIcon icon={faPen} /></div>
+						<div className="expense-item__delete controls__button" onClick={deleteClick}><FontAwesomeIcon icon={faX} /></div>
 					</div>
 				</Card>
 			</li>
 		)
 	}
 }
-export default ExpenseItem;
+//export default ExpenseItem;
+
+const mapStateToProps = (state) => {
+	return {
+		expenses: state.expenses,
+		expensesSelected : state.expensesSelected,
+		isOpenExpensesForm: state.isOpenExpensesForm,
+		isAlertPopup: state.isAlertPopup,
+		isAlertPopupMessage: state.isAlertPopupMessage,
+		expensesUpdateFlag: state.expensesUpdateFlag,
+		yearSelected: state.yearSelected,
+		isAlertPopupOk : state.isAlertPopupOk,
+		isAlertPopupCancel : state.isAlertPopupCancel,
+		expensesSetArr: state.expensesSetArr,
+		yearSelectedBefore: state.yearSelectedBefore,
+	};
+};
+
+const mapDispatchToProps = (dispatch) => {
+	return {
+		expensesAdd: (expenseData) => dispatch(expensesAdd(expenseData)),
+		expensesDelete: (expenseData) => dispatch(expensesDelete(expenseData)),
+		expensesModify: (expenseData) => dispatch(expensesModify(expenseData)),
+		expensesSelect: (expenseData) => dispatch(expensesSelect(expenseData)),
+		expensesClick: (boo) => dispatch(expensesClick(boo)),
+		alertPopupState: (boo) => dispatch(alertPopupState(boo)),
+		alertPopupMessage: (str) => dispatch(alertPopupMessage(str)),
+		expenseUpdateFlag: (boo) => dispatch(expenseUpdateFlag(boo)),
+		yearSelect: (str) => dispatch(yearSelect(str)),
+		expensesSet: (expenseData) => dispatch(expensesSet(expenseData)),
+		yearSelectBefore: (str) => dispatch(yearSelectBefore(str)),
+	};
+};
+
+//export default ExpenseForm;
+export default connect(mapStateToProps, mapDispatchToProps)(ExpenseItem);
